@@ -110,3 +110,8 @@ class TruthTable:
                   for j in range(0, varNumber):
                         print(self.valueList[i][j], end='\t')
                   print(self.resultList[i])
+
+
+
+# tt = TruthTable('(((P2 -> P1) | ~P2) <-> P2)')
+# tt.printTt()
