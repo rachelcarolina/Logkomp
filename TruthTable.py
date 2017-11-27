@@ -52,7 +52,6 @@ class TruthTable:
                               i += 1
                               
                   while not self.ops.isEmpty():
-                        print(hehe)
                         currentOp = self.ops.pop()
                         if currentOp == '~':
                               operand = self.value.pop()

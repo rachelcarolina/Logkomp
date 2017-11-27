@@ -8,14 +8,9 @@ class Cnf:
     def __init__(self, string):
         stringSpace = string.replace('(', '( ', string.count('(')).replace(')', ' )', string.count(')')).replace('~', '~ ', string.count('~'))
         self.opList = stringSpace.split()
-        self.varList = []
-        for op in self.opList:
-            self.varList.append(op)
         self.prefix = self.to_prefix()
         self.remove_biimplication(self.prefix)
         self.remove_implication(self.prefix)
-        self.de_morgan(self.prefix)
-        currentList = copy.deepcopy(self.prefix)
         self.de_morgan(self.prefix)
         self.fix_literal(self.prefix)
         self.distribution(self.prefix)
@@ -81,12 +76,10 @@ class Cnf:
             literal = components[1]
             if literal[0] == '~':
                 del components[:]
-                if len(literal[1]) == 1:
+                if isinstance(literal[1], str):
                     components.append(literal[1])
                 else:
-                    string = ''
                     for literal1 in literal[1]:
-                        # string += literal1
                         components.append(literal1)
                     if len(components) > 1:
                         self.de_morgan(components)
@@ -241,5 +234,5 @@ def getClauseSubset(components):
         return subclause
 
 # contoh:
-c = Cnf('(((P -> Q) -> (R -> S)) & (Q -> R))')
-c.printClauses()     
+# c = Cnf('~((P2 -> P4) -> (P3 & P4))')
+# c.printClauses()     
